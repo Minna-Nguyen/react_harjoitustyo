@@ -44,13 +44,14 @@ body {
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 1em;
-  padding: 1em;
   background-color: peachpuff;
-  height: 450px;
   border-bottom: 4px solid rgb(128, 128, 128, 0.8);
+  /* justify-content: center; */
+  gap: 1.5em;
+  padding: 1em;
+  height: 450px;
 }
+/* this layout for 'about' page */
 .left-box,
 .right-box {
   background-color: ivory;
@@ -62,7 +63,14 @@ body {
 .right-box {
   background-color: orange;
 }
-
+/* layout for task pages */
+.container > .box {
+  background-color: ivory;
+  padding: 2em;
+  width: 40vw;
+  border-radius: 5%;
+  margin-left: 3em;
+}
 nav {
   padding: 1em;
   /* background-color: peachpuff; */

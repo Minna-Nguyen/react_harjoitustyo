@@ -1,0 +1,34 @@
+{
+  "house_chores": [
+    {
+      "id": 1,
+      "task": "do the dishes",
+      "completed:": false
+    },
+    {
+      "id": 2,
+      "task": "clean the room",
+      "completed:": false
+    }
+  ],
+  "homework": [
+    { "id": 1, "task": "write report on version control", "completed:": false },
+    {
+      "id": 2,
+      "task": "study backend module",
+      "completed:": false
+    }
+  ],
+  "other_tasks": [
+    {
+      "id": 1,
+      "task": "online shopping",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "task": "yoga",
+      "completed": false
+    }
+  ]
+}

@@ -10,6 +10,7 @@ function OtherTasks(props) {
             House
           </p>
           <p> display only 'other task' related tasks HERE</p>
+          <p> add buttons</p>
         </div>
       </div>
     </>

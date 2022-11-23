@@ -10,6 +10,7 @@ function Homework(props) {
             "Yes, now you deserve a break. Because you worked a lot, right?"
           </p>
           <p>Display all your 'homework' related tasks HERE</p>
+          <p> add buttons</p>
         </div>
       </div>
     </>

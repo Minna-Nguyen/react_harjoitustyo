@@ -26,6 +26,14 @@ function About(props) {
               <strong> Mui React component library</strong>
             </button>
           </p>
+          <h3>Running the json server</h3>
+          <p>
+            This project uses json server. Make sure 'db.json' is at root level!
+          </p>
+          <p>Run the server ... </p>
+          <p>
+            <em>npx json-server -H localhost -p 3010 -w ./db.json</em>
+          </p>
         </div>
         <div>
           <p> the color theme is just temporary</p>

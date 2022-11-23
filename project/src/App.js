@@ -30,9 +30,6 @@ class App extends React.Component {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="about">About</Link>
-                </li>
-                <li className="nav-item">
                   <Link to="/homework">Homework tasks</Link>
                 </li>
                 <li className="nav-item">
@@ -40,6 +37,9 @@ class App extends React.Component {
                 </li>
                 <li className="nav-item">
                   <Link to="other_tasks">Other tasks</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="about">About</Link>
                 </li>
               </ul>
               {/* </div> */}

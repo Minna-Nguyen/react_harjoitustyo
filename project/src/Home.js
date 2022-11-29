@@ -4,11 +4,26 @@ function Home(props) {
   const [tasks, setShowTask] = useState([]);
 
   function displayTask() {
-    fetch("http://localhost:3010/house_chores")
-      .then((res) => res.json())
-      .then((data) => {
-        setShowTask(data);
-      });
+    const allContext = [
+      "http://localhost:3010/house_chores",
+      "http://localhost:3010/homework",
+      "http://localhost:3010/other_tasks",
+    ];
+
+    Promise.all(
+      allContext.map((url) =>
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            setShowTask(data);
+          })
+      )
+    );
+    // fetch("http://localhost:3010/house_chores")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setShowTask(data);
+    //   });
   }
   // function addTask(){
   //   fetch("http://localhost:3010/house_chores"), {

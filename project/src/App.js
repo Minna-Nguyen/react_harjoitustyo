@@ -9,9 +9,9 @@ import HouseChores from "./HouseChores";
 import OtherTasks from "./OtherTasks";
 
 class App extends React.Component {
-  componentDidMount() {
-    fetch("http://localhost:3010/homework").then((res) => res.json());
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:3010/homework").then((res) => res.json());
+  // }
   render() {
     return (
       <>

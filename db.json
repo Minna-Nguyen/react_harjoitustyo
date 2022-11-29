@@ -9,6 +9,11 @@
       "id": 2,
       "task": "clean the room",
       "completed:": false
+    },
+    {
+      "id": 3,
+      "task": "do the laundry",
+      "completed:": false
     }
   ],
   "homework": [

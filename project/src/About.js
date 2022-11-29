@@ -13,8 +13,21 @@ function About(props) {
           <p>
             Well by me, <strong>Minna Nguyen</strong>
           </p>
+          <h3>Project uses some libraries...</h3>
+          <p>This project uses BrowserRouter, so npm install it!</p>
+          <p>
+            <em>npm install react-router-dom</em>
+          </p>
         </div>
         <div className="right-box">
+          <h3>Running the json server</h3>
+          <p>
+            This project uses json server. Make sure 'db.json' is at root level!
+          </p>
+          <p>Run the server ... </p>
+          <p>
+            <em>npx json-server -H localhost -p 3010 -w ./db.json</em>
+          </p>
           <h3>Logos, icons, pictures etc.</h3>
           <p>
             Pictures are mine.
@@ -25,14 +38,6 @@ function About(props) {
             <button id="mui-link" onClick={handleClick}>
               <strong> Mui React component library</strong>
             </button>
-          </p>
-          <h3>Running the json server</h3>
-          <p>
-            This project uses json server. Make sure 'db.json' is at root level!
-          </p>
-          <p>Run the server ... </p>
-          <p>
-            <em>npx json-server -H localhost -p 3010 -w ./db.json</em>
           </p>
         </div>
         <div>

@@ -1,5 +1,5 @@
 {
-  "house_chores": [
+  "tasks": [
     {
       "id": 1,
       "task": "do the dishes",
@@ -14,26 +14,33 @@
       "id": 3,
       "task": "do the laundry",
       "completed:": false
-    }
-  ],
-  "homework": [
-    { "id": 1, "task": "write report on version control", "completed:": false },
+    },
+    { "id": 4, "task": "write report", "completed:": false },
     {
-      "id": 2,
+      "id": 5,
       "task": "study backend module",
       "completed:": false
-    }
-  ],
-  "other_tasks": [
+    },
     {
-      "id": 1,
+      "id": 6,
       "task": "online shopping",
       "completed": false
     },
     {
-      "id": 2,
+      "id": 7,
       "task": "yoga",
       "completed": false
+    },
+    {
+      "id": 8,
+      "task": "bake cookies",
+      "completed": false
     }
+  ],
+
+  "context": [
+    { "id": 1, "title": "homework" },
+    { "id": 2, "title": "house chores" },
+    { "id": 3, "title": "other chores" }
   ]
 }

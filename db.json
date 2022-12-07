@@ -3,44 +3,64 @@
     {
       "id": 1,
       "task": "do the dishes",
+      "context": ["house"],
+      "duration": 0.5,
       "completed:": false
     },
     {
       "id": 2,
       "task": "clean the room",
+      "context": ["homework", "other"],
+      "duration": 1,
       "completed:": false
     },
     {
       "id": 3,
       "task": "do the laundry",
+      "context": ["house"],
+      "duration": 20,
       "completed:": false
     },
-    { "id": 4, "task": "write report", "completed:": false },
+    {
+      "id": 4,
+      "task": "write report",
+      "context": ["homework"],
+      "duration": 2.5,
+      "completed:": false
+    },
     {
       "id": 5,
       "task": "study backend module",
+      "context": ["homework"],
+      "duration": 4,
       "completed:": false
     },
     {
       "id": 6,
       "task": "online shopping",
+      "context": ["other"],
+      "duration": 2.5,
       "completed": false
     },
     {
       "id": 7,
       "task": "yoga",
+      "context": ["other"],
+      "duration": 2,
       "completed": false
     },
     {
       "id": 8,
       "task": "bake cookies",
+      "context": ["other"],
+      "duration": 3,
       "completed": false
     }
   ],
 
-  "context": [
+  "contexts": [
     { "id": 1, "title": "homework" },
     { "id": 2, "title": "house chores" },
-    { "id": 3, "title": "other chores" }
+    { "id": 3, "title": "other" }
   ]
 }

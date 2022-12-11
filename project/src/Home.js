@@ -1,11 +1,12 @@
-// import ChangeTextTimely from "./ChangeTextTimely";
 import { useState } from "react";
+import { useRef } from "react";
+import AddTask from "./addTask";
 function Home(props) {
   const [tasks, setShowTask] = useState([]);
   const [contexts, setShowContext] = useState([]);
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
-
+  // const [validInput, setValidInput] = useState("");
   function ShowTasks() {
     // show = true
     if (!showTasks) {
@@ -16,6 +17,7 @@ function Home(props) {
     // resset the true to false
     setShowTasks(!showTasks);
   }
+
   function ShowContexts() {
     // show = true
     if (!showContexts) {
@@ -45,14 +47,28 @@ function Home(props) {
         setShowContext(data);
       });
   }
-  // function addTask(){
-  //   fetch("http://localhost:3010/house_chores"), {
-  //     method: "POST"
-  //   }
-  // }
-  // function Show() {
-  //   setShow(!showTasks);
-  // }
+  const addNewTask = useRef(null);
+  function AddTask() {
+    const userInput = addNewTask.current.value;
+    if (userInput.length === 0) {
+      console.log("not valid");
+      // setValidInput("asdfasdf");
+    } else {
+      fetch("http://localhost:3010/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          task: `${addNewTask.current.value}`,
+          context: ["test", "hello"],
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+  }
+
   return (
     <>
       <div className="container">
@@ -68,7 +84,6 @@ function Home(props) {
               ))}
             </div>
           )}
-
           <br></br>
           <button onClick={ShowContexts}>Show context</button>
           {showContexts && (
@@ -78,6 +93,15 @@ function Home(props) {
               ))}
             </div>
           )}
+          <input
+            ref={addNewTask}
+            type="text"
+            // value="Add new task"
+            // onChange={addNewTask}
+          ></input>
+          {/* {validInput} */}
+          <button onClick={AddTask}>Add new task</button>
+          {/* <AddTask newTask={"take a break"} addContext={["other"]}></AddTask> */}
         </div>
       </div>
     </>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useRef } from "react";
-import AddTask from "./addTask";
 function Home(props) {
   const [tasks, setShowTask] = useState([]);
   const [contexts, setShowContext] = useState([]);
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
-  // const [validInput, setValidInput] = useState("");
+  const [addTask, setAddTask] = useState("");
+  const [addContext, setContext] = useState("");
   function ShowTasks() {
     // show = true
     if (!showTasks) {
@@ -47,25 +47,30 @@ function Home(props) {
         setShowContext(data);
       });
   }
-  const addNewTask = useRef(null);
-  function AddTask() {
-    const userInput = addNewTask.current.value;
-    if (userInput.length === 0) {
-      console.log("not valid");
-      // setValidInput("asdfasdf");
-    } else {
+  //adding new task and context to task
+  // const addNewTask = useRef(null);
+  // const addNewContext = useRef(null);
+  function AddTask(e) {
+    // const userAddTask = addNewTask.current.value;
+    // const userAddNewContext = addNewContext.current.value;
+    e.preventDefault();
+    if (addTask.length !== 0 && addContext.length !== 0) {
+      // console.log("not valid");
       fetch("http://localhost:3010/tasks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          task: `${addNewTask.current.value}`,
-          context: ["test", "hello"],
+          // task: `${userAddTask}`,
+          task: `${addTask}`,
+          context: `${addContext}`,
         }),
-      })
+      }) //then() etc is to fetch the data from the db.json so that we can see if it was successful on the console
         .then((resp) => resp.json())
         .then((data) => {
           console.log(data);
         });
+    } else {
+      console.log("not working");
     }
   }
 
@@ -93,15 +98,43 @@ function Home(props) {
               ))}
             </div>
           )}
-          <input
+          {/* <input
             ref={addNewTask}
             type="text"
+
             // value="Add new task"
             // onChange={addNewTask}
-          ></input>
-          {/* {validInput} */}
+          ></input> */}
+          {/* <input
+            // ref={addNewContext}
+            type="text"
+            placeholder="Add task"
+            // required
+            // pattern="[A-Za-z]{2,20}"
+            // onChange={(e) => setAddTask
+            (e.target.value)}
+          ></input> */}
+          {/* {addTask} */}
+          <form>
+            <input
+              type="text"
+              placeholder="Add new task"
+              required
+              value={addTask}
+              onChange={(e) => setAddTask(e.target.value)}
+            ></input>{" "}
+            <input
+              // ref={addNewContext}
+              type="text"
+              placeholder="Add context"
+              required
+              value={addContext}
+              onChange={(e) => setContext(e.target.value)}
+            ></input>
+          </form>
           <button onClick={AddTask}>Add new task</button>
-          {/* <AddTask newTask={"take a break"} addContext={["other"]}></AddTask> */}
+          <p>{addTask}</p>
+          <p>{addContext}</p>
         </div>
       </div>
     </>

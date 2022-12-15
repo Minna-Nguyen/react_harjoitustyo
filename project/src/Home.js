@@ -54,24 +54,26 @@ function Home(props) {
     // const userAddTask = addNewTask.current.value;
     // const userAddNewContext = addNewContext.current.value;
     e.preventDefault();
-    if (addTask.length !== 0 && addContext.length !== 0) {
-      // console.log("not valid");
-      fetch("http://localhost:3010/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          // task: `${userAddTask}`,
-          task: `${addTask}`,
-          context: `${addContext}`,
-        }),
-      }) //then() etc is to fetch the data from the db.json so that we can see if it was successful on the console
-        .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data);
-        });
-    } else {
-      console.log("not working");
-    }
+    console.log(typeof addContext);
+    console.log(addContext.length);
+    // if (addTask.length !== 0 && addContext.length !== 0) {
+    //   // console.log("not valid");
+    fetch("http://localhost:3010/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        // task: `${userAddTask}`,
+        task: `${addTask}`,
+        context: `${addContext}`,
+      }),
+    }) //then() etc is to fetch the data from the db.json so that we can see if it was successful on the console
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+      });
+    // } else {
+    //   console.log("not working");
+    // }
   }
 
   return (
@@ -115,24 +117,25 @@ function Home(props) {
             (e.target.value)}
           ></input> */}
           {/* {addTask} */}
-          <form>
+          <form onSubmit={AddTask}>
             <input
               type="text"
-              placeholder="Add new task"
               required
+              placeholder="Add new task"
               value={addTask}
               onChange={(e) => setAddTask(e.target.value)}
             ></input>{" "}
             <input
               // ref={addNewContext}
               type="text"
-              placeholder="Add context"
               required
-              value={addContext}
+              placeholder="Add context"
+              // value={addContext}
               onChange={(e) => setContext(e.target.value)}
             ></input>
+            <input type="submit" value={"Add"}></input>
           </form>
-          <button onClick={AddTask}>Add new task</button>
+          {/* <button onClick={AddTask}>Add new task</button> */}
           <p>{addTask}</p>
           <p>{addContext}</p>
         </div>

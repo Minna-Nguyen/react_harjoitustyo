@@ -7,6 +7,7 @@ function Home(props) {
   const [showContexts, setShowContexts] = useState(false);
   const [addTask, setAddTask] = useState("");
   const [addContext, setContext] = useState("");
+  const [addDuration, setDuration] = useState("");
   function ShowTasks() {
     // show = true
     if (!showTasks) {
@@ -48,32 +49,31 @@ function Home(props) {
       });
   }
   //adding new task and context to task
-  // const addNewTask = useRef(null);
-  // const addNewContext = useRef(null);
   function AddTask(e) {
-    // const userAddTask = addNewTask.current.value;
-    // const userAddNewContext = addNewContext.current.value;
     e.preventDefault();
-    console.log(typeof addContext);
-    console.log(addContext.length);
-    // if (addTask.length !== 0 && addContext.length !== 0) {
-    //   // console.log("not valid");
-    fetch("http://localhost:3010/tasks", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        // task: `${userAddTask}`,
-        task: `${addTask}`,
-        context: `${addContext}`,
-      }),
-    }) //then() etc is to fetch the data from the db.json so that we can see if it was successful on the console
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-      });
-    // } else {
-    //   console.log("not working");
-    // }
+    // context is one tag or more
+    if (!addContext.includes(",") || addContext.includes(", ")) {
+      fetch("http://localhost:3010/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          task: `${addTask}`,
+          //split() separete the string by this separator and create new array
+          duration: addDuration,
+          context: addContext.split(", "),
+          completed: false,
+        }),
+      }) //then() etc is to fetch the data from the db.json so that we can see if it was successful on the console
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log(data);
+        });
+      alert(
+        `You added new task: ${addTask}\n You added context: ${addContext}\n You added duration: ${addDuration}`
+      );
+    } else {
+      alert("Please add space between contexts after comma (,)");
+    }
   }
 
   return (
@@ -126,18 +126,25 @@ function Home(props) {
               onChange={(e) => setAddTask(e.target.value)}
             ></input>{" "}
             <input
-              // ref={addNewContext}
               type="text"
               required
               placeholder="Add context"
-              // value={addContext}
+              value={addContext}
               onChange={(e) => setContext(e.target.value)}
+            ></input>{" "}
+            <input
+              type="text"
+              required
+              placeholder="Add duration"
+              value={addDuration}
+              onChange={(e) => setDuration(e.target.value)}
             ></input>
             <input type="submit" value={"Add"}></input>
           </form>
           {/* <button onClick={AddTask}>Add new task</button> */}
           <p>{addTask}</p>
           <p>{addContext}</p>
+          <p>{addDuration}</p>
         </div>
       </div>
     </>

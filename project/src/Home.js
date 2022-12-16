@@ -106,17 +106,26 @@ function Home(props) {
                 <>
                   <li key={task.id}>
                     {task.task}{" "}
-                    <button
+                    <strong
                       onClick={DeleteById}
                       onChange={(e) => setDeleteTask(e.target.value)}
                     >
-                      Task id: {task.id}
-                    </button>
+                      id: {task.id}
+                    </strong>
                   </li>
                 </>
               ))}
             </div>
           )}
+          <br></br>
+          <input
+            type="text"
+            placeholder="Write the task to delete"
+            value={deleteTask}
+            onChange={(e) => setDeleteTask(e.target.value)}
+          ></input>
+          <button onClick={DeleteById}>Delete</button>
+          <br></br>
           <br></br>
           <button onClick={ShowContexts}>Show context</button>
           {showContexts && (
@@ -128,13 +137,6 @@ function Home(props) {
           )}
           <AddNewTask></AddNewTask>
           <br></br>
-          <input
-            type="text"
-            placeholder="Write the task to delete"
-            value={deleteTask}
-            onChange={(e) => setDeleteTask(e.target.value)}
-          ></input>
-          <button onClick={DeleteById}>Delete</button>
         </div>
       </div>
     </>

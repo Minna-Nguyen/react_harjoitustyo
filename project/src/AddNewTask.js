@@ -19,7 +19,7 @@ function AddNewTask(props) {
         body: JSON.stringify({
           task: `${addTask}`,
           //split() separete the string by this separator and create new array
-          duration: addDuration,
+          duration: Number(addDuration),
           context: addContext.split(", "),
           completed: false,
         }),

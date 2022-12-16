@@ -38,7 +38,9 @@ function About(props) {
             <button id="mui-link" onClick={handleClick}>
               <strong> Mui React component library</strong>
             </button>
+            Install it to see the icons and other materials:
           </p>
+          <em>npm install @mui/material @emotion/react @emotion/styled</em>
         </div>
         <div>
           <p> the color theme is just temporary</p>

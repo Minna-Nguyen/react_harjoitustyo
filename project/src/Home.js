@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { display } from "@mui/system";
+import { useEffect, useState } from "react";
 import AddNewTask from "./AddNewTask";
 function Home(props) {
   const [tasks, setShowTask] = useState([]);
@@ -6,8 +7,8 @@ function Home(props) {
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
   const [deleteTask, setDeleteTask] = useState("");
+  const [test, setTest] = useState([]);
   const [remove, setRemove] = useState("");
-  let [test, setTest] = useState([]);
 
   function ShowTasks() {
     // show = true
@@ -49,30 +50,34 @@ function Home(props) {
         setShowContext(data);
       });
   }
-  function DeleteById() {
-    fetch("http://localhost:3010/tasks")
-      .then((response) => response.json())
-      .then((data) => {
-        // to view certain task and its content or whatnot, have to call it array[i].context
-        // console.log(data[0].duration);
-        // task: id 2 where context are ["homework", "other"]
-        // console.log(data[1].context);
-        setTest(data);
-      });
+  // useEffect(() => {
+  //   DisplayAllTasks();
+  // }, []);
+  function DeleteById(id) {
+    const toDelete = tasks.find((item) => item.id === id);
 
-    console.log(test);
-    // const id = 10;
-    console.log(deleteTask);
-    fetch(`http://localhost:3010/tasks/${deleteTask}`, {
+    // console.log(JSON.parse(toDelete.id));
+    fetch(`http://localhost:3010/tasks/${JSON.parse(toDelete.id)}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setTest(data);
-        // setTest([...remove]);
-        console.log(test);
-      });
+    });
+
+    // console.log("deltetask: " + deleteTask);
+    // fetch(`${url}${id}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setTest(data);
+    //     console.log(data);
+    //   });
+    // fetch(`${url}`, {
+    //   method: "DELETE",
+    //   // headers: { "Content-Type": "application/json" },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setTest(data);
+    //     // setTest([...remove]);
+    //     console.log(test);
+    //   });
 
     // let arr = [];
     // console.log(deleteTask);
@@ -106,12 +111,15 @@ function Home(props) {
                 <>
                   <li key={task.id}>
                     {task.task}{" "}
-                    <strong
-                      onClick={DeleteById}
-                      onChange={(e) => setDeleteTask(e.target.value)}
+                    <button
+                      key={task.id}
+                      onClick={() => {
+                        DeleteById(task.id);
+                      }}
+                      // onChange={(e) => setDeleteTask(e.target.value)}
                     >
                       id: {task.id}
-                    </strong>
+                    </button>
                   </li>
                 </>
               ))}
@@ -120,11 +128,11 @@ function Home(props) {
           <br></br>
           <input
             type="text"
-            placeholder="Write the task to delete"
+            placeholder="Write the task ID to delete"
             value={deleteTask}
             onChange={(e) => setDeleteTask(e.target.value)}
           ></input>
-          <button onClick={DeleteById}>Delete</button>
+          {/* <button onClick={DeleteById}>Delete</button> */}
           <br></br>
           <br></br>
           <button onClick={ShowContexts}>Show context</button>
@@ -135,6 +143,8 @@ function Home(props) {
               ))}
             </div>
           )}
+          <br></br>
+          <br></br>
           <AddNewTask></AddNewTask>
           <br></br>
         </div>

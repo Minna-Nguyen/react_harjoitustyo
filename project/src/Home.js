@@ -6,7 +6,7 @@ function Home(props) {
   const [contexts, setShowContext] = useState([]);
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
-  const [deleteTask, setDeleteTask] = useState("");
+  // const [deleteTask, setDeleteTask] = useState("");
 
   function ShowTasks() {
     // show = true
@@ -48,7 +48,7 @@ function Home(props) {
         setShowContext(data);
       });
   }
-  function DeleteById(id) {
+  function DeleteTAsk(id) {
     const toDelete = tasks.find((item) => item.id === id);
 
     // console.log(JSON.parse(toDelete.id));
@@ -57,15 +57,7 @@ function Home(props) {
     });
   }
   useEffect(() => {
-    fetch("http://localhost:3010/tasks")
-      .then((response) => response.json())
-      .then((data) => {
-        // to view certain task and its content or whatnot, have to call it array[i].context
-        // console.log(data[0].duration);
-        // task: id 2 where context are ["homework", "other"]
-        // console.log(data[1].context);
-        setShowTask(data);
-      });
+    DisplayAllTasks();
   });
 
   return (
@@ -83,11 +75,10 @@ function Home(props) {
                     <button
                       key={task.id}
                       onClick={() => {
-                        DeleteById(task.id);
+                        DeleteTAsk(task.id);
                       }}
-                      // onChange={(e) => setDeleteTask(e.target.value)}
                     >
-                      id: {task.id}
+                      Delete
                     </button>
                   </li>
                 </>

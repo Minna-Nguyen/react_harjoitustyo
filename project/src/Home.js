@@ -1,6 +1,6 @@
-import { display } from "@mui/system";
 import { useEffect, useState } from "react";
 import AddNewTask from "./AddNewTask";
+import AddNewContext from "./AddNewContext";
 function Home(props) {
   const [tasks, setShowTask] = useState([]);
   const [contexts, setShowContext] = useState([]);
@@ -54,8 +54,16 @@ function Home(props) {
       method: "DELETE",
     });
   }
-
+  function DeleteContext(id) {
+    const toDelete = contexts.find((item) => item.id === id);
+    fetch(`http://localhost:3010/contexts/${JSON.parse(toDelete.id)}`, {
+      method: "DELETE",
+    });
+  }
   useEffect(() => {
+    if (showContexts) {
+      DisplayContexts();
+    }
     DisplayAllTasks();
   });
 
@@ -85,7 +93,7 @@ function Home(props) {
             </div>
           )}
           <br></br>
-
+          <AddNewTask></AddNewTask>
           <br></br>
           <br></br>
           <button onClick={ShowContexts}>Show context</button>
@@ -98,7 +106,7 @@ function Home(props) {
                     <button
                       key={context.id}
                       onClick={() => {
-                        DeleteTask(context.id);
+                        DeleteContext(context.id);
                       }}
                     >
                       Delete
@@ -110,7 +118,7 @@ function Home(props) {
           )}
           <br></br>
           <br></br>
-          <AddNewTask></AddNewTask>
+          <AddNewContext></AddNewContext>
           <br></br>
         </div>
       </div>

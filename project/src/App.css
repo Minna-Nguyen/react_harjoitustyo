@@ -49,7 +49,7 @@ body {
   /* justify-content: center; */
   gap: 1.5em;
   padding: 1em;
-  height: 100vh;
+  height: 100%;
 }
 /* this layout for 'about' page */
 .left-box,
@@ -68,6 +68,7 @@ body {
   background-color: ivory;
   padding: 2em;
   width: 40vw;
+  height: 100%;
   border-radius: 5%;
   margin-left: 3em;
 }

@@ -7,6 +7,7 @@ function Home(props) {
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
   // const [deleteTask, setDeleteTask] = useState("");
+  const [test, setTest] = useState([]);
 
   function ShowTasks() {
     // show = true
@@ -60,6 +61,9 @@ function Home(props) {
       method: "DELETE",
     });
   }
+
+  const listTest = tasks.map((tasks, indesx) => <li>{tasks}</li>);
+
   useEffect(() => {
     if (showContexts) {
       DisplayContexts();
@@ -75,34 +79,36 @@ function Home(props) {
           <button onClick={ShowTasks}>Display all tasks</button>
           {showTasks && (
             <div>
-              {tasks.map((task) => (
+              {tasks.map((task, id) => (
                 <>
                   <li key={task.id}>
                     {task.task}
-                    <button
-                      key={task.id}
-                      onClick={() => {
-                        DeleteTask(task.id);
-                      }}
-                    >
-                      Delete
-                    </button>
+                    {""}
                   </li>
+                  <button
+                    onClick={() => {
+                      DeleteTask(task.id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </>
               ))}
             </div>
           )}
+          {/* {listTest} */}
           <br></br>
           <AddNewTask></AddNewTask>
           <br></br>
           <br></br>
-          <button onClick={ShowContexts}>Show context</button>
+          {/* <button onClick={ShowContexts}>Show context</button>
           {showContexts && (
             <div>
               {contexts.map((context) => (
                 <>
                   <li key={context.id}>
-                    {context.title}{" "}
+                    {context.title}
+
                     <button
                       key={context.id}
                       onClick={() => {
@@ -115,7 +121,7 @@ function Home(props) {
                 </>
               ))}
             </div>
-          )}
+          )} */}
           <br></br>
           <br></br>
           <AddNewContext></AddNewContext>

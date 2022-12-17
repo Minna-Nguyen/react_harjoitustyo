@@ -48,14 +48,13 @@ function Home(props) {
         setShowContext(data);
       });
   }
-  function DeleteTAsk(id) {
+  function DeleteTask(id) {
     const toDelete = tasks.find((item) => item.id === id);
-
-    // console.log(JSON.parse(toDelete.id));
     fetch(`http://localhost:3010/tasks/${JSON.parse(toDelete.id)}`, {
       method: "DELETE",
     });
   }
+
   useEffect(() => {
     DisplayAllTasks();
   });
@@ -71,11 +70,11 @@ function Home(props) {
               {tasks.map((task) => (
                 <>
                   <li key={task.id}>
-                    {task.task}{" "}
+                    {task.task}
                     <button
                       key={task.id}
                       onClick={() => {
-                        DeleteTAsk(task.id);
+                        DeleteTask(task.id);
                       }}
                     >
                       Delete
@@ -93,7 +92,19 @@ function Home(props) {
           {showContexts && (
             <div>
               {contexts.map((context) => (
-                <li key={context.id}>{context.title}</li>
+                <>
+                  <li key={context.id}>
+                    {context.title}{" "}
+                    <button
+                      key={context.id}
+                      onClick={() => {
+                        DeleteTask(context.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                </>
               ))}
             </div>
           )}

@@ -1,13 +1,6 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "task": "do the dishes",
-      "context": ["house"],
-      "duration": 0.5,
-      "completed:": false
-    },
-    {
       "id": 2,
       "task": "clean the room",
       "context": ["homework", "other"],
@@ -55,12 +48,40 @@
       "context": ["other"],
       "duration": 3,
       "completed": false
+    },
+    {
+      "task": "cry",
+      "duration": 4,
+      "context": ["other", "extra"],
+      "completed": false,
+      "id": 9
+    },
+    {
+      "task": "brush teeth",
+      "duration": 1.5,
+      "context": ["daily life"],
+      "completed": false,
+      "id": 10
+    },
+    {
+      "task": "cry",
+      "duration": 2,
+      "context": ["other", "rest"],
+      "completed": false,
+      "id": 48
     }
   ],
-
   "contexts": [
     { "id": 1, "title": "homework" },
     { "id": 2, "title": "house chores" },
-    { "id": 3, "title": "other" }
+    { "id": 3, "title": "other" },
+    {
+      "title": "help",
+      "id": 10
+    },
+    {
+      "title": "help",
+      "id": 11
+    }
   ]
 }

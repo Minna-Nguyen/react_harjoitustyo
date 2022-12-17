@@ -7,8 +7,6 @@ function Home(props) {
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
   const [deleteTask, setDeleteTask] = useState("");
-  const [test, setTest] = useState([]);
-  const [remove, setRemove] = useState("");
 
   function ShowTasks() {
     // show = true
@@ -50,9 +48,6 @@ function Home(props) {
         setShowContext(data);
       });
   }
-  // useEffect(() => {
-  //   DisplayAllTasks();
-  // }, []);
   function DeleteById(id) {
     const toDelete = tasks.find((item) => item.id === id);
 
@@ -60,44 +55,18 @@ function Home(props) {
     fetch(`http://localhost:3010/tasks/${JSON.parse(toDelete.id)}`, {
       method: "DELETE",
     });
-
-    // console.log("deltetask: " + deleteTask);
-    // fetch(`${url}${id}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setTest(data);
-    //     console.log(data);
-    //   });
-    // fetch(`${url}`, {
-    //   method: "DELETE",
-    //   // headers: { "Content-Type": "application/json" },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setTest(data);
-    //     // setTest([...remove]);
-    //     console.log(test);
-    //   });
-
-    // let arr = [];
-    // console.log(deleteTask);
-    // fetch(`http://localhost:3010/tasks/?task=${deleteTask}`, {
-    //   method: "DELETE",
-    //   headers: { "Content-Type": "application/json" },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     // setShowTask(data);
-    //     // console.log(setShowTask(data));
-    //     // data.filter((item) => {
-    //     //   if (deleteTask === item.task) {
-    //     //     console.log(item);
-    //     //   }
-    //     // });
-    //     setTest(data);
-    //     console.log(test);
-    //   });
   }
+  useEffect(() => {
+    fetch("http://localhost:3010/tasks")
+      .then((response) => response.json())
+      .then((data) => {
+        // to view certain task and its content or whatnot, have to call it array[i].context
+        // console.log(data[0].duration);
+        // task: id 2 where context are ["homework", "other"]
+        // console.log(data[1].context);
+        setShowTask(data);
+      });
+  });
 
   return (
     <>
@@ -126,13 +95,7 @@ function Home(props) {
             </div>
           )}
           <br></br>
-          <input
-            type="text"
-            placeholder="Write the task ID to delete"
-            value={deleteTask}
-            onChange={(e) => setDeleteTask(e.target.value)}
-          ></input>
-          {/* <button onClick={DeleteById}>Delete</button> */}
+
           <br></br>
           <br></br>
           <button onClick={ShowContexts}>Show context</button>

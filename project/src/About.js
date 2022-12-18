@@ -30,8 +30,8 @@ function About(props) {
           </p>
           <h3>Logos, icons, pictures etc.</h3>
           <p>
-            Pictures are mine.
-            <em>... will update about this matter later</em>
+            The icon logo is drawn by me. This project mainly uses free
+            libraries such as MUI
           </p>
           <p>
             I use
@@ -43,7 +43,13 @@ function About(props) {
           <em>npm install @mui/material @emotion/react @emotion/styled</em>
         </div>
         <div>
-          <p> the color theme is just temporary</p>
+          <strong>Additional info...</strong>
+          <p>
+            Only home page has all the functionalities. Other pages don't have
+            anything done yet. I mainly focused on getting some basic
+            functionalities done. Main coding is done in Home.js file.
+            Additional components are for the Home.js.
+          </p>
         </div>
       </div>
     </>

@@ -14,7 +14,6 @@ function Home(props) {
     if (!showTasks) {
       DisplayAllTasks();
     }
-
     // else {
     //   setShowTasks(!showTasks);
     // }
@@ -64,11 +63,9 @@ function Home(props) {
   }
 
   useEffect(() => {
-    if (showContexts) {
-      DisplayContexts();
-    }
     DisplayAllTasks();
-  });
+    DisplayContexts();
+  }, []);
 
   return (
     <>

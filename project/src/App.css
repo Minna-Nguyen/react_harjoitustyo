@@ -57,6 +57,7 @@ body {
   background-color: ivory;
   padding: 2em;
   width: 40vw;
+  height: 100%;
   margin: 10px auto;
   border-radius: 5%;
 }

@@ -1,112 +1,96 @@
 {
   "tasks": [
     {
-      "id": 8,
-      "task": "bake cookies",
+      "id": 4,
+      "task": "ödkljfask334",
       "context": [
-        "other"
+        "sdf"
       ],
-      "duration": 3,
+      "duration": 45,
+      "completed:": false,
       "completed": false
     },
     {
-      "task": "asdfas",
-      "duration": 34,
+      "id": 5,
+      "task": "asdf333",
       "context": [
-        "lol"
+        "werw"
+      ],
+      "duration": 23,
+      "completed:": false,
+      "completed": false
+    },
+    {
+      "id": 6,
+      "task": "WRITE REPOT",
+      "context": [
+        "D"
+      ],
+      "duration": 44,
+      "completed": false
+    },
+    {
+      "id": 8,
+      "task": "ödkljfask334",
+      "context": [
+        "sdf"
+      ],
+      "duration": 45,
+      "completed": false
+    },
+    {
+      "task": "CRY HARDER",
+      "duration": 234,
+      "context": [
+        "TEST"
       ],
       "completed": false,
       "id": 9
     },
     {
-      "task": "asdfas",
-      "duration": 34,
+      "task": "CRY HARDER",
+      "duration": 234,
       "context": [
-        "lol"
+        "TEST"
       ],
       "completed": false,
       "id": 10
     },
     {
-      "task": "read a book",
-      "duration": 34,
+      "task": "CRY HARDER",
+      "duration": 234,
       "context": [
-        "lol"
+        "TEST"
       ],
       "completed": false,
-      "id": 27
+      "id": 48
     },
     {
-      "task": "read a book",
+      "task": "help this looks so stupid",
       "duration": 34,
       "context": [
-        "lol"
+        "this"
       ],
       "completed": false,
-      "id": 29
+      "id": 49
     },
     {
-      "task": "read a book",
-      "duration": 34,
+      "task": "does this vahnge? 50",
+      "duration": null,
       "context": [
-        "lol"
+        "asdfdf"
       ],
       "completed": false,
-      "id": 32
+      "id": 50
     },
     {
-      "task": "read more cvooks",
+      "task": "help this looks so stupid",
       "duration": 34,
       "context": [
-        "ok"
+        "this"
       ],
       "completed": false,
-      "id": 33
-    },
-    {
-      "task": "read more cvooks",
-      "duration": 34,
-      "context": [
-        "ok"
-      ],
-      "completed": false,
-      "id": 34
-    },
-    {
-      "task": "read more cvooks",
-      "duration": 34,
-      "context": [
-        "ok"
-      ],
-      "completed": false,
-      "id": 35
-    },
-    {
-      "task": "read more cvooks",
-      "duration": 34,
-      "context": [
-        "ok"
-      ],
-      "completed": false,
-      "id": 37
-    },
-    {
-      "task": "read more cvooks",
-      "duration": 34,
-      "context": [
-        "ok"
-      ],
-      "completed": false,
-      "id": 38
-    },
-    {
-      "task": "read more cvooks",
-      "duration": 34,
-      "context": [
-        "ok"
-      ],
-      "completed": false,
-      "id": 39
+      "id": 52
     }
   ],
   "contexts": [
@@ -127,12 +111,36 @@
       "id": 7
     },
     {
-      "title": "hahah",
+      "title": "asdfasdf",
+      "id": 8
+    },
+    {
+      "title": "asdfasdf",
       "id": 9
     },
     {
-      "title": "oh no",
+      "title": "asdfasdf",
       "id": 10
+    },
+    {
+      "title": "asdfasdf",
+      "id": 11
+    },
+    {
+      "title": "one ",
+      "id": 12
+    },
+    {
+      "title": "aösldkfjasl",
+      "id": 13
+    },
+    {
+      "title": "asdfasdf",
+      "id": 14
+    },
+    {
+      "title": "aösldkfjasl",
+      "id": 15
     }
   ]
 }

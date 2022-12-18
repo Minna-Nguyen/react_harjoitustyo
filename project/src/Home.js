@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import AddNewTask from "./AddNewTask";
 import AddNewContext from "./AddNewContext";
+import Alert from "@mui/material/Alert";
+import { Snackbar } from "@mui/material";
+import { Collapse } from "@mui/material";
 function Home(props) {
   const [tasks, setShowTask] = useState([]);
   const [contexts, setShowContext] = useState([]);
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
-  const [editTask, setAddTask] = useState("");
-  const [addContext, setContext] = useState("");
-  const [addDuration, setDuration] = useState("");
-  const [show, setShow] = useState(false);
-
+  // for task editing
+  const [editTask, setEditTask] = useState("");
+  const [editTaskContext, setEditTaskContext] = useState("");
+  const [editDuration, setEditDuration] = useState("");
+  // for context editing
+  const [editContextTitle, setEditContextTitle] = useState("");
+  const [open, setOpen] = useState(false);
   function DeleteTask(id) {
     const toDelete = tasks.find((item) => item.id === id);
     fetch(`http://localhost:3010/tasks/${JSON.parse(toDelete.id)}`, {
@@ -24,58 +29,49 @@ function Home(props) {
     });
   }
 
-  // const showInput = () => {
-  //   <form>
-  //     <label>Task: </label>
-  //     <input
-  //       type="text"
-  //       required
-  //       placeholder="Edit task"
-  //       value={editTask}
-  //       onChange={(e) => setAddTask(e.target.value)}
-  //     ></input>
-  //     <br></br>
-  //     <label>Context: </label>
-  //     <input
-  //       type="text"
-  //       required
-  //       placeholder="Edit context"
-  //       value={addContext}
-  //       onChange={(e) => setContext(e.target.value)}
-  //     ></input>
-  //     <br></br>
-  //     <label>Duration: </label>
-  //     <input
-  //       type="text"
-  //       required
-  //       placeholder="Edit duration"
-  //       value={addDuration}
-  //       onChange={(e) => setDuration(e.target.value)}
-  //     ></input>{" "}
-  //     <br></br>
-  //     <br></br>
-  //     <input type="submit" value={"Edit"}></input>
-  //   </form>;
-  // };
   function EditTask(id) {
     // e.preventDefault();
-    setShow(!show);
     console.log("editis");
-    console.log(show);
     const toEdit = tasks.find((item) => item.id === id);
-    if (editTask !== "")
+    if (editTask !== "" && editDuration !== "" && editTaskContext !== "") {
       fetch(`http://localhost:3010/tasks/${JSON.parse(toEdit.id)}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           task: `${editTask}`,
           //split() separete the string by this separator and create new array
-          duration: Number(addDuration),
-          context: addContext.split(", "),
+          duration: Number(editDuration),
+          context: editTaskContext.split(", "),
           completed: false,
         }),
       });
+      // editTaskSuccess(!editTaskSuccess);
+      setOpen(!open);
+    }
   }
+  function EditContext(id) {
+    // id.preventDefault();
+    console.log("editis");
+    const toEdit = contexts.find((item) => item.id === id);
+    if (editContextTitle !== "") {
+      fetch(`http://localhost:3010/contexts/${JSON.parse(toEdit.id)}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: `${editContextTitle}`,
+        }),
+      });
+      setOpen(!open);
+    }
+  }
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    // editTaskSuccess(false);
+    setOpen(false);
+  };
   useEffect(() => {
     const getTasks = () => {
       fetch("http://localhost:3010/tasks")
@@ -148,6 +144,7 @@ function Home(props) {
                   {tasks.map((task, index) => (
                     <li key={task.id}>
                       <button
+                        type="submit"
                         key={index}
                         onClick={() => {
                           EditTask(task.id);
@@ -161,7 +158,7 @@ function Home(props) {
                               required
                               placeholder="Edit task"
                               value={editTask}
-                              onChange={(e) => setAddTask(e.target.value)}
+                              onChange={(e) => setEditTask(e.target.value)}
                             ></input>
                             <br></br>
                             <label>Context: </label>
@@ -169,8 +166,10 @@ function Home(props) {
                               type="text"
                               required
                               placeholder="Edit context"
-                              value={addContext}
-                              onChange={(e) => setContext(e.target.value)}
+                              value={editTaskContext}
+                              onChange={(e) =>
+                                setEditTaskContext(e.target.value)
+                              }
                             ></input>
                             <br></br>
                             <label>Duration: </label>
@@ -178,15 +177,15 @@ function Home(props) {
                               type="text"
                               required
                               placeholder="Edit duration"
-                              value={addDuration}
-                              onChange={(e) => setDuration(e.target.value)}
+                              value={editDuration}
+                              onChange={(e) => setEditDuration(e.target.value)}
                             ></input>{" "}
                             <br></br>
                             <br></br>
                             {/* <input type="submit" value={"Edit"}></input> */}
                           </form>
                         </>
-                        Edit {task.task} {task.id}
+                        Edit {task.task}
                       </button>
                     </li>
                   ))}
@@ -194,6 +193,15 @@ function Home(props) {
               </div>
             </>
           )}
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Edit success!
+            </Alert>
+          </Snackbar>
           <br></br>
 
           <AddNewTask></AddNewTask>
@@ -212,7 +220,7 @@ function Home(props) {
                     <li key={item.id}>{item.title}</li>
                   ))}
                 </div>
-                <div>
+                <div className="edit">
                   {contexts.map((item, index) => (
                     <li key={item.id}>
                       <button
@@ -222,6 +230,33 @@ function Home(props) {
                         }}
                       >
                         Delete {item.title}
+                      </button>
+                    </li>
+                  ))}
+                </div>
+                <div className="edit">
+                  {contexts.map((context, index) => (
+                    <li key={context.id}>
+                      <button
+                        key={index}
+                        onClick={() => {
+                          EditContext(context.id);
+                        }}
+                      >
+                        <form>
+                          <label>Context: </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="Edit context"
+                            value={editContextTitle}
+                            onChange={(e) =>
+                              setEditContextTitle(e.target.value)
+                            }
+                          ></input>
+                          <br></br>
+                        </form>
+                        Edit {context.title}
                       </button>
                     </li>
                   ))}

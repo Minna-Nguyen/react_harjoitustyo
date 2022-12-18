@@ -1,16 +1,6 @@
 {
   "tasks": [
     {
-      "id": 4,
-      "task": "ödkljfask334",
-      "context": [
-        "sdf"
-      ],
-      "duration": 45,
-      "completed:": false,
-      "completed": false
-    },
-    {
       "id": 5,
       "task": "asdf333",
       "context": [

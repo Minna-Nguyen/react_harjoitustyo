@@ -13,10 +13,12 @@ function Home(props) {
     // show = true
     if (!showTasks) {
       DisplayAllTasks();
-    } else {
-      setShowTasks(!showTasks);
     }
-    // resset the true to false
+
+    // else {
+    //   setShowTasks(!showTasks);
+    // }
+    // // resset the true to false
     setShowTasks(!showTasks);
   }
 
@@ -24,9 +26,8 @@ function Home(props) {
     // show = true
     if (!showContexts) {
       DisplayContexts();
-    } else {
-      setShowContexts(!showContexts);
     }
+
     // resset the true to false
     setShowContexts(!showContexts);
   }
@@ -62,8 +63,6 @@ function Home(props) {
     });
   }
 
-  const listTest = tasks.map((tasks, indesx) => <li>{tasks}</li>);
-
   useEffect(() => {
     if (showContexts) {
       DisplayContexts();
@@ -77,55 +76,66 @@ function Home(props) {
         <div className="box">
           <h3>Welcome, get started with your to do list!</h3>
           <button onClick={ShowTasks}>Display all tasks</button>
+          <br></br>
+          <br></br>
           {showTasks && (
-            <div>
-              {tasks.map((task, id) => (
-                <>
-                  <li key={task.id}>
-                    {task.task}
-                    {""}
-                  </li>
-                  <button
-                    onClick={() => {
-                      DeleteTask(task.id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                </>
-              ))}
-            </div>
+            <>
+              <div className="row">
+                <div className="edit">
+                  {tasks.map((task) => (
+                    <li key={task.id}>{task.task}</li>
+                  ))}
+                </div>
+                <div>
+                  {tasks.map((task, index) => (
+                    <li key={task.id}>
+                      <button
+                        key={index}
+                        onClick={() => {
+                          DeleteTask(task.id);
+                        }}
+                      >
+                        Delete {task.task}
+                      </button>
+                    </li>
+                  ))}
+                </div>
+              </div>
+            </>
           )}
-          {/* {listTest} */}
+
           <br></br>
           <AddNewTask></AddNewTask>
           <br></br>
           <br></br>
-          {/* <button onClick={ShowContexts}>Show context</button>
+          <button onClick={ShowContexts}>Show context</button>
+          <br></br>
+          <br></br>
           {showContexts && (
-            <div>
-              {contexts.map((context) => (
-                <>
-                  <li key={context.id}>
-                    {context.title}
-
-                    <button
-                      key={context.id}
-                      onClick={() => {
-                        DeleteContext(context.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </li>
-                </>
-              ))}
-            </div>
-          )} */}
-          <br></br>
-          <br></br>
-          <AddNewContext></AddNewContext>
-          <br></br>
+            <>
+              <div className="row">
+                <div className="edit">
+                  {contexts.map((item) => (
+                    <li key={item.id}>{item.title}</li>
+                  ))}
+                </div>
+                <div>
+                  {contexts.map((item, index) => (
+                    <li key={item.id}>
+                      <button
+                        key={index}
+                        onClick={() => {
+                          DeleteContext(item.id);
+                        }}
+                      >
+                        Delete {item.title}
+                      </button>
+                    </li>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

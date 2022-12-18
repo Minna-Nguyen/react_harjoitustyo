@@ -6,6 +6,10 @@ function Home(props) {
   const [contexts, setShowContext] = useState([]);
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
+  const [editTask, setAddTask] = useState("");
+  const [addContext, setContext] = useState("");
+  const [addDuration, setDuration] = useState("");
+  const [show, setShow] = useState(false);
 
   function DeleteTask(id) {
     const toDelete = tasks.find((item) => item.id === id);
@@ -20,6 +24,58 @@ function Home(props) {
     });
   }
 
+  // const showInput = () => {
+  //   <form>
+  //     <label>Task: </label>
+  //     <input
+  //       type="text"
+  //       required
+  //       placeholder="Edit task"
+  //       value={editTask}
+  //       onChange={(e) => setAddTask(e.target.value)}
+  //     ></input>
+  //     <br></br>
+  //     <label>Context: </label>
+  //     <input
+  //       type="text"
+  //       required
+  //       placeholder="Edit context"
+  //       value={addContext}
+  //       onChange={(e) => setContext(e.target.value)}
+  //     ></input>
+  //     <br></br>
+  //     <label>Duration: </label>
+  //     <input
+  //       type="text"
+  //       required
+  //       placeholder="Edit duration"
+  //       value={addDuration}
+  //       onChange={(e) => setDuration(e.target.value)}
+  //     ></input>{" "}
+  //     <br></br>
+  //     <br></br>
+  //     <input type="submit" value={"Edit"}></input>
+  //   </form>;
+  // };
+  function EditTask(id) {
+    // e.preventDefault();
+    setShow(!show);
+    console.log("editis");
+    console.log(show);
+    const toEdit = tasks.find((item) => item.id === id);
+    if (editTask !== "")
+      fetch(`http://localhost:3010/tasks/${JSON.parse(toEdit.id)}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          task: `${editTask}`,
+          //split() separete the string by this separator and create new array
+          duration: Number(addDuration),
+          context: addContext.split(", "),
+          completed: false,
+        }),
+      });
+  }
   useEffect(() => {
     const getTasks = () => {
       fetch("http://localhost:3010/tasks")
@@ -56,13 +112,11 @@ function Home(props) {
       getContexts();
     }
   });
-
   return (
     <>
       <div className="container">
         <div className="box">
           <h3>Welcome, get started with your to do list!</h3>
-          {/* <button onClick={ShowTasks}>Display all tasks</button> */}
           <button onClick={() => setShowTasks(!showTasks)}>
             Display tasks
           </button>
@@ -76,7 +130,7 @@ function Home(props) {
                     <li key={task.id}>{task.task}</li>
                   ))}
                 </div>
-                <div>
+                <div className="edit">
                   {tasks.map((task, index) => (
                     <li key={task.id}>
                       <button
@@ -90,15 +144,61 @@ function Home(props) {
                     </li>
                   ))}
                 </div>
+                <div className="edit">
+                  {tasks.map((task, index) => (
+                    <li key={task.id}>
+                      <button
+                        key={index}
+                        onClick={() => {
+                          EditTask(task.id);
+                        }}
+                      >
+                        <>
+                          <form>
+                            <label>Task: </label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="Edit task"
+                              value={editTask}
+                              onChange={(e) => setAddTask(e.target.value)}
+                            ></input>
+                            <br></br>
+                            <label>Context: </label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="Edit context"
+                              value={addContext}
+                              onChange={(e) => setContext(e.target.value)}
+                            ></input>
+                            <br></br>
+                            <label>Duration: </label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="Edit duration"
+                              value={addDuration}
+                              onChange={(e) => setDuration(e.target.value)}
+                            ></input>{" "}
+                            <br></br>
+                            <br></br>
+                            {/* <input type="submit" value={"Edit"}></input> */}
+                          </form>
+                        </>
+                        Edit {task.task} {task.id}
+                      </button>
+                    </li>
+                  ))}
+                </div>
               </div>
             </>
           )}
-
           <br></br>
+
           <AddNewTask></AddNewTask>
           <br></br>
           <br></br>
-          {/* <button onClick={ShowContexts}>Show context</button> */}
           <button onClick={() => setShowContexts(!showContexts)}>
             Display contexts
           </button>

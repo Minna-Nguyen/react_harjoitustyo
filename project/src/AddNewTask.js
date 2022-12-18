@@ -54,7 +54,7 @@ function AddNewTask(props) {
           onChange={(e) => setContext(e.target.value)}
         ></input>
         <br></br>
-        <label>Duration: </label>
+        <label>For how long: </label>
         <input
           type="text"
           required

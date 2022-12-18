@@ -67,7 +67,7 @@ body {
 .container > .box {
   background-color: ivory;
   padding: 2em;
-  width: 40vw;
+  width: 100%;
   height: 100%;
   border-radius: 5%;
   margin-left: 3em;
@@ -114,7 +114,17 @@ ul {
   margin-right: auto;
   font-style: italic;
 }
+.edit {
+  float: left;
+  width: 33.33%;
+}
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 li a:hover {
   background-color: peachpuff;
   border-radius: 10%;

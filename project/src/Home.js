@@ -6,49 +6,7 @@ function Home(props) {
   const [contexts, setShowContext] = useState([]);
   const [showTasks, setShowTasks] = useState(false);
   const [showContexts, setShowContexts] = useState(false);
-  // const [deleteTask, setDeleteTask] = useState("");
-  const [test, setTest] = useState([]);
 
-  // function ShowTasks() {
-  //   // show = true
-  //   if (!showTasks) {
-  //     DisplayAllTasks();
-  //   }
-  //   // else {
-  //   //   setShowTasks(!showTasks);
-  //   // }
-  //   // // resset the true to false
-  //   setShowTasks(!showTasks);
-  // }
-
-  // function ShowContexts() {
-  //   // show = true
-  //   if (!showContexts) {
-  //     DisplayContexts();
-  //   }
-
-  // resset the true to false
-  //   setShowContexts(!showContexts);
-  // // }
-  // function DisplayAllTasks() {
-  //   fetch("http://localhost:3010/tasks")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // to view certain task and its content or whatnot, have to call it array[i].context
-  //       // console.log(data[0].duration);
-  //       // task: id 2 where context are ["homework", "other"]
-  //       // console.log(data[1].context);
-  //       setShowTask(data);
-  //     });
-  // }
-
-  // function DisplayContexts() {
-  //   fetch("http://localhost:3010/contexts")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setShowContext(data);
-  //     });
-  // }
   function DeleteTask(id) {
     const toDelete = tasks.find((item) => item.id === id);
     fetch(`http://localhost:3010/tasks/${JSON.parse(toDelete.id)}`, {
@@ -81,33 +39,23 @@ function Home(props) {
     if (showTasks) {
       getTasks();
     }
+  });
+  useEffect(() => {
     const getContexts = () => {
       fetch("http://localhost:3010/contexts")
         .then((res) => res.json())
         .then((data) => {
           setShowContext(data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     };
 
-    if (!showContexts) {
+    if (showContexts) {
       getContexts();
     }
   });
-  // useEffect(() => {
-  //   const getContexts = () => {
-  //     fetch("http://localhost:3010/contexts")
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setShowContext(data);
-  //       });
-  //   };
-
-  //   if (showContexts) {
-  //     getContexts();
-  //   }
-  //   // DisplayAllTasks();
-  //   // DisplayContexts();
-  // }, [showContexts]);
 
   return (
     <>
@@ -181,6 +129,7 @@ function Home(props) {
               </div>
             </>
           )}
+          <AddNewContext></AddNewContext>
         </div>
       </div>
     </>

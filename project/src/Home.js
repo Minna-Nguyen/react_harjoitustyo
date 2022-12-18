@@ -3,7 +3,6 @@ import AddNewTask from "./AddNewTask";
 import AddNewContext from "./AddNewContext";
 import Alert from "@mui/material/Alert";
 import { Snackbar } from "@mui/material";
-import { Collapse } from "@mui/material";
 function Home(props) {
   const [tasks, setShowTask] = useState([]);
   const [contexts, setShowContext] = useState([]);
@@ -64,14 +63,17 @@ function Home(props) {
       setOpen(!open);
     }
   }
+
+  // this is for the Collapse MUI functionality.
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
-    // editTaskSuccess(false);
     setOpen(false);
   };
+
+  // useEffect will update the json file. It will fetch the newly updated data when 'edit', 'add' orr 'delete' actions are done
   useEffect(() => {
     const getTasks = () => {
       fetch("http://localhost:3010/tasks")

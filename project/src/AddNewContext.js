@@ -9,7 +9,7 @@ function AddNewContext(props) {
   const [errorClose, setErrorClose] = useState(false);
   let handleSubmit = (e) => {
     // context is one tag or more
-    // e.preventDefault();
+    e.preventDefault();
     if (!addContext.includes(",")) {
       fetch("http://localhost:3010/contexts", {
         method: "POST",

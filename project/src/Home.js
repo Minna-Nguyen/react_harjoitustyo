@@ -9,46 +9,46 @@ function Home(props) {
   // const [deleteTask, setDeleteTask] = useState("");
   const [test, setTest] = useState([]);
 
-  function ShowTasks() {
-    // show = true
-    if (!showTasks) {
-      DisplayAllTasks();
-    }
-    // else {
-    //   setShowTasks(!showTasks);
-    // }
-    // // resset the true to false
-    setShowTasks(!showTasks);
-  }
+  // function ShowTasks() {
+  //   // show = true
+  //   if (!showTasks) {
+  //     DisplayAllTasks();
+  //   }
+  //   // else {
+  //   //   setShowTasks(!showTasks);
+  //   // }
+  //   // // resset the true to false
+  //   setShowTasks(!showTasks);
+  // }
 
-  function ShowContexts() {
-    // show = true
-    if (!showContexts) {
-      DisplayContexts();
-    }
+  // function ShowContexts() {
+  //   // show = true
+  //   if (!showContexts) {
+  //     DisplayContexts();
+  //   }
 
-    // resset the true to false
-    setShowContexts(!showContexts);
-  }
-  function DisplayAllTasks() {
-    fetch("http://localhost:3010/tasks")
-      .then((response) => response.json())
-      .then((data) => {
-        // to view certain task and its content or whatnot, have to call it array[i].context
-        // console.log(data[0].duration);
-        // task: id 2 where context are ["homework", "other"]
-        // console.log(data[1].context);
-        setShowTask(data);
-      });
-  }
+  // resset the true to false
+  //   setShowContexts(!showContexts);
+  // // }
+  // function DisplayAllTasks() {
+  //   fetch("http://localhost:3010/tasks")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // to view certain task and its content or whatnot, have to call it array[i].context
+  //       // console.log(data[0].duration);
+  //       // task: id 2 where context are ["homework", "other"]
+  //       // console.log(data[1].context);
+  //       setShowTask(data);
+  //     });
+  // }
 
-  function DisplayContexts() {
-    fetch("http://localhost:3010/contexts")
-      .then((res) => res.json())
-      .then((data) => {
-        setShowContext(data);
-      });
-  }
+  // function DisplayContexts() {
+  //   fetch("http://localhost:3010/contexts")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setShowContext(data);
+  //     });
+  // }
   function DeleteTask(id) {
     const toDelete = tasks.find((item) => item.id === id);
     fetch(`http://localhost:3010/tasks/${JSON.parse(toDelete.id)}`, {
@@ -63,16 +63,61 @@ function Home(props) {
   }
 
   useEffect(() => {
-    DisplayAllTasks();
-    DisplayContexts();
-  }, []);
+    const getTasks = () => {
+      fetch("http://localhost:3010/tasks")
+        .then((response) => response.json())
+        .then((data) => {
+          // to view certain task and its content or whatnot, have to call it array[i].context
+          // console.log(data[0].duration);
+          // task: id 2 where context are ["homework", "other"]
+          // console.log(data[1].context);
+          setShowTask(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    if (showTasks) {
+      getTasks();
+    }
+    const getContexts = () => {
+      fetch("http://localhost:3010/contexts")
+        .then((res) => res.json())
+        .then((data) => {
+          setShowContext(data);
+        });
+    };
+
+    if (!showContexts) {
+      getContexts();
+    }
+  });
+  // useEffect(() => {
+  //   const getContexts = () => {
+  //     fetch("http://localhost:3010/contexts")
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setShowContext(data);
+  //       });
+  //   };
+
+  //   if (showContexts) {
+  //     getContexts();
+  //   }
+  //   // DisplayAllTasks();
+  //   // DisplayContexts();
+  // }, [showContexts]);
 
   return (
     <>
       <div className="container">
         <div className="box">
           <h3>Welcome, get started with your to do list!</h3>
-          <button onClick={ShowTasks}>Display all tasks</button>
+          {/* <button onClick={ShowTasks}>Display all tasks</button> */}
+          <button onClick={() => setShowTasks(!showTasks)}>
+            Display tasks
+          </button>
           <br></br>
           <br></br>
           {showTasks && (
@@ -105,7 +150,10 @@ function Home(props) {
           <AddNewTask></AddNewTask>
           <br></br>
           <br></br>
-          <button onClick={ShowContexts}>Show context</button>
+          {/* <button onClick={ShowContexts}>Show context</button> */}
+          <button onClick={() => setShowContexts(!showContexts)}>
+            Display contexts
+          </button>
           <br></br>
           <br></br>
           {showContexts && (
